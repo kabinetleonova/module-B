@@ -1,27 +1,29 @@
 <script>
-import axios from "axios"
 
 export default {
   data() {
     return {
+      host: "http://xxxxxx-m2.domain.ru/login",
       login: "",
       password: "",
       error: ""
     }
   },
   methods: {
-    postauth() {
-      if(this.login.trim().length < 3) {
-        this.error = "Логин должен быть более чем из 3 символов"
-      }
+    async postauth() {
+      const res = await fetch('http://xxxxxx-m2.domain.ru/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
 
-      if(this.password.trim().length < 8) {
-        this.error = "Логин должен быть более чем из 3 символов"
-      }
-
-      this.error = ""
-
-      axios.post()
+        credentials: 'include',
+        body: JSON.stringify({
+          login: 'sdsadsad',
+          password: 'dsadsadsad'
+        })
+      })
+      console.log(res)
     }
   }
 }
@@ -29,7 +31,7 @@ export default {
 
 <template>
   <div class="wrapper">
-    <form>
+    <form @submit.prevent>
       <input v-model="login" placeholder="Логин">
       <input v-model="password" placeholder="Пароль">
       <button @click="postauth">Войти</button>
