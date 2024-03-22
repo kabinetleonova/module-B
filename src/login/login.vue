@@ -1,6 +1,10 @@
 <script>
 
+import BBtn from "@/components/UI/Bbtn.vue";
+import BInput from "@/components/UI/Binput.vue";
+
 export default {
+  components: {BInput, BBtn},
   data() {
     return {
       host: "http://xxxxxx-m2.domain.ru/login",
@@ -32,9 +36,9 @@ export default {
 <template>
   <div class="wrapper">
     <form @submit.prevent>
-      <input v-model="login" placeholder="Логин">
-      <input v-model="password" placeholder="Пароль">
-      <button @click="postauth">Войти</button>
+      <BInput v-model="login" placeholder="Логин"></BInput>
+      <BInput v-model="password" placeholder="Пароль"></BInput>
+      <BBtn @click="postauth">Войти</BBtn>
     </form>
 
     <p>{{ error }}</p>
